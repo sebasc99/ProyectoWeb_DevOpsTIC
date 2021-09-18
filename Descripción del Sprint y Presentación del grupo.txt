@@ -21,7 +21,8 @@ Presentación Personal de los Integrantes del Grupo:
 El grupo de trabajo que lleva el nombre de DevOps TIC se conforma por 5 integrantes masculinos de estudios
 diversos los cuales llevaran su presentación personal a continuación:
 
-->
+-> Hola, Soy Sebastian Cardenas Suarez (Scrum Master), soy Ingeniero de Software y estoy interesado en adquirir conocimiento en el
+   area de desarrollo web. Actualmente estoy aprendiendo a manejar los repositorios con GIT y GITHUB, y desarrollo web con REACT.
 
 ->
 

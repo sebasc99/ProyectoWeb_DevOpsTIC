@@ -1,0 +1,32 @@
+SPRINT 1
+
+Descripción:
+
+En el Sprint 1 se busca que los participantes de Misión TIC 2022 interactuaran un poco más entre ellos, 
+con el fin de lograr este objetivo se les impartió a los participantes que conformaran grupo de 5 integrantes
+entre las personas que se encuentran en los grupos de formación que eligieron.
+
+Conjunto a ello y en aras de simular un ambiente de trabajo como el que se lleva a cabo en el ámbito laboral,
+se procedió a llevar a cabo la metodología de trabajo Scrum, de este modo cada uno de los integrantes
+desarrollaría funciones específicas, pero todos encaminados a lograr un objetivo general uniendo todo 
+el material desarrollado individualmente.
+
+Para finalizar el Sprint 1 busca que el grupo interactúe a través de Git y GitHub, llevando a cabo ciertas
+historias de usuarios y encargando objetivos que se deben llevar a cabo por el grupo y que al interior de
+este debe repartirse entre todos, de esta forma logrando la participación de sus integrantes y recaudando
+pruebas de lo desarrollado en el proceso.
+
+Presentación Personal de los Integrantes del Grupo:
+
+El grupo de trabajo que lleva el nombre de DevOps TIC se conforma por 5 integrantes masculinos de estudios
+diversos los cuales llevaran su presentación personal a continuación:
+
+->
+
+->
+
+->
+
+->
+
+->

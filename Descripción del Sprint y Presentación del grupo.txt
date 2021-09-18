@@ -28,7 +28,9 @@ diversos los cuales llevaran su presentación personal a continuación:
    mucho la atención desarrollo de aplicaciones móviles tanto para Android como en iOS, actualmente estoy aprendiendo sobre
    desarrollo web y manejo de Git y Github, pueden contactarme al correo Anflorezm@hotmail.com
 
-->
+-> Mi nomnbre es Luis Carlos Gomez Pino (Analista) soy tecnico en produccion de hidrocarburos, 
+   me interesa aprender mucho sobre desarrollo web y apps moviles.
+   Actualmente estoy aprendiendo mucho sobre la metodologia SCRUM y manejo de git y git Hub.
 
 ->
 

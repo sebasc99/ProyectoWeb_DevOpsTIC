@@ -32,6 +32,8 @@ diversos los cuales llevaran su presentación personal a continuación:
    me interesa aprender mucho sobre desarrollo web y apps moviles.
    Actualmente estoy aprendiendo mucho sobre la metodologia SCRUM y manejo de git y git Hub.
 
-->
+-> Mucho gusto, mi nombre es Sebastian Cataño Pérez (Developer), soy bachiller con especialidad en soporte TI certificado por Google y estoy interesado
+   en aprender sobre desarrollo web. Actualmente estoy aprendiendo a utilizar los lenguajes de programación para el desarrollo web como lo son
+   HTML, JS Y CSS.
 
 ->

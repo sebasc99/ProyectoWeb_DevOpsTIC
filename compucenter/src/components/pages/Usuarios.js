@@ -13,12 +13,12 @@ import {
 } from "reactstrap";
 
 const data = [
-  { id: 1, Usuario: "Monica Alvarez", Rol: "Administrador", Estado: "Pendiente" },
-  { id: 2, Usuario: "Andres", Rol: "Comercial", Estado: "Pendiente" },
-  { id: 3, Usuario: "Sebastian Cardenas", Rol: "Comercial", Estado: "Pendiente" },
-  { id: 4, Usuario: "Luis Gomez", Rol: "Comercial", Estado: "Pendiente" },
-  { id: 5, Usuario: "Sebastian Cataño", Rol: "Comercial", Estado: "Pendiente" },
-  { id: 6, Usuario: "Sebastian Leal", Rol: "Comercial", Estado: "Pendiente" },
+  { id: 1, usuario: "Monica Alvarez", rol: "Administrador", estado: "Inactivo" },
+  { id: 2, usuario: "Andres", rol: "Vendedor", estado: "Inactivo" },
+  { id: 3, usuario: "Sebastian Cardenas", rol: "Vendedor", estado: "Inactivo" },
+  { id: 4, usuario: "Luis Gomez", rol: "Vendedor", estado: "Inactivo" },
+  { id: 5, usuario: "Sebastian Cataño", rol: "Vendedor", estado: "Inactivo" },
+  { id: 6, usuario: "Sebastian Leal", rol: "Vendedor", estado: "Inactivo" },
 ];
 
 class Usuarios extends React.Component {
@@ -28,8 +28,8 @@ class Usuarios extends React.Component {
     modalInsertar: false,
     form: {
       id: "",
-      Usuario: "",
-      Rol: "",
+      usuario: "",
+      rol: "",
       estado: "",
     },
   };
@@ -60,9 +60,9 @@ class Usuarios extends React.Component {
     var arreglo = this.state.data;
     arreglo.map((registro) => {
       if (dato.id == registro.id) {
-        arreglo[contador].Usuario = dato.Usuario;
-        arreglo[contador].Rol = dato.Rol;
-        arreglo[contador].Estado = dato.Estado;
+        arreglo[contador].usuario = dato.usuario;
+        arreglo[contador].rol = dato.rol;
+        arreglo[contador].estado = dato.estado;
       }
       contador++;
     });
@@ -70,7 +70,7 @@ class Usuarios extends React.Component {
   };
 
   eliminar = (dato) => {
-    var opcion = window.confirm("Estás Seguro que deseas Eliminar el elemento " + dato.id);
+    var opcion = window.confirm("Está Seguro que deseas eliminar el usuario " + dato.id + "?");
     if (opcion == true) {
       var contador = 0;
       var arreglo = this.state.data;
@@ -105,28 +105,11 @@ class Usuarios extends React.Component {
 
     return (
       <>
-        <header className="header paginas">
-          <div className="contenedor">
-            <h1 className="logo">CompuCenter</h1>
-            <span className="icon-menu" id="btn-menu"></span>
-            <nav className="nav" id="nav">
-              <ul className="menu">
-                <li className="menu_item"><a className="menu_link" href="">Home</a></li>
-                <li className="menu_item"><a className="menu_link" href="">Gestión de Productos</a></li>
-                <li className="menu_item"><a className="menu_link select" href="">Gestión de Ventas</a></li>
-                <li className="menu_item"><a className="menu_link" href="">Gestión de Usuarios</a></li>
-                <li className="menu_item"><a className="menu_link" href="">Salir</a></li>
-              </ul>
-            </nav>
-          </div>
-        </header>
-        <h2>Gestión de Usuarios</h2 >
+        <br />
         
         <Container>
-          <br />
-          <Button color="success" onClick={() => this.mostrarModalInsertar()}>Crear</Button>
-          <br />
-          <br />
+          <Button color="success" onClick={() => this.mostrarModalInsertar()}>Nuevo Usuario</Button>
+          <br /><br />
           <Table>
             <thead>
               <tr>
@@ -142,9 +125,9 @@ class Usuarios extends React.Component {
               {this.state.data.map((dato) => (
                 <tr key={dato.id}>
                   <td>{dato.id}</td>
-                  <td>{dato.Usuario}</td>
-                  <td>{dato.Rol}</td>
-                  <td>{dato.Estado}</td>
+                  <td>{dato.usuario}</td>
+                  <td>{dato.rol}</td>
+                  <td>{dato.estado}</td>
                   <td>
                     <Button
                       color="primary"
@@ -162,7 +145,7 @@ class Usuarios extends React.Component {
 
         <Modal isOpen={this.state.modalActualizar}>
           <ModalHeader>
-            <div><h3>Editar Registro</h3></div>
+            <div><h3>Editar Usuario</h3></div>
           </ModalHeader>
 
           <ModalBody>
@@ -185,37 +168,30 @@ class Usuarios extends React.Component {
               </label>
               <input
                 className="form-control"
-                name="Usuario"
+                name="usuario"
                 type="text"
                 onChange={this.handleChange}
-                value={this.state.form.Usuario}
+                value={this.state.form.usuario}
               />
             </FormGroup>
 
             <FormGroup>
-              <label>
-                Rol:
-              </label>
-              <input
-                className="form-control"
-                name="Rol"
-                type="text"
-                onChange={this.handleChange}
-                value={this.state.form.Rol}
-              />
+              <label>Rol:</label>
+              <select className="form-control" name="rol" onChange={this.handleChange} value={this.state.form.rol}>
+                <option value="">Seleccione</option>
+                <option value="ADMINISTRADOR">Administrador</option>
+                <option value="VENDEDOR">Vendedor</option>
+              </select>
             </FormGroup>
 
             <FormGroup>
-              <label>
-                estado :
-              </label>
-              <input
-                className="form-control"
-                name="estado"
-                type="text"
-                onChange={this.handleChange}
-                value={this.state.form.estado}
-              />
+              <label>Estado:</label>
+              <select className="form-control" name="estado" onChange={this.handleChange} value={this.state.form.estado}>
+                <option value="">Seleccione</option>
+                <option value="ACTIVO">Activo</option>
+                <option value="PENDIENTE">Pendiente</option>
+                <option value="INACTIVO">Inactivo</option>
+              </select>
             </FormGroup>
           </ModalBody>
 
@@ -239,7 +215,7 @@ class Usuarios extends React.Component {
 
         <Modal isOpen={this.state.modalInsertar}>
           <ModalHeader>
-            <div><h3>Insertar Usuario</h3></div>
+            <div><h3>Nuevo Usuario</h3></div>
           </ModalHeader>
 
           <ModalBody>
@@ -262,34 +238,29 @@ class Usuarios extends React.Component {
               </label>
               <input
                 className="form-control"
-                name="Usuario"
+                name="usuario"
                 type="text"
                 onChange={this.handleChange}
               />
             </FormGroup>
 
             <FormGroup>
-              <label>
-                Rol:
-              </label>
-              <input
-                className="form-control"
-                name="Rol"
-                type="text"
-                onChange={this.handleChange}
-              />
+              <label>Rol:</label>
+              <select className="form-control" name="rol" onChange={this.handleChange}>
+                <option value="">Seleccione</option>
+                <option value="ADMINISTRADOR">Administrador</option>
+                <option value="VENDEDOR">Vendedor</option>
+              </select>
             </FormGroup>
 
             <FormGroup>
-              <label>
-                estado:
-              </label>
-              <input
-                className="form-control"
-                name="estado"
-                type="text"
-                onChange={this.handleChange}
-              />
+              <label>Estado:</label>
+              <select className="form-control" name="estado" onChange={this.handleChange}>
+                <option value="">Seleccione</option>
+                <option value="ACTIVO">Activo</option>
+                <option value="PENDIENTE">Pendiente</option>
+                <option value="INACTIVO">Inactivo</option>
+              </select>
             </FormGroup>
           </ModalBody>
 

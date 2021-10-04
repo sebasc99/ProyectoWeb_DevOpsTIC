@@ -1,21 +1,15 @@
 import React from 'react';
+import './Productos.css';
 import { Table, Button, Container, Modal, ModalBody, ModalHeader, FormGroup, ModalFooter } from 'reactstrap';
 
 const datosVenta = [
-    { id: 1, valor: '300000', idProducto:'1', cantidad:'3', precioUnitario:'100000', fecha:'yy/yy/yyyy', idCliente:'234', nombreCliente:'Marco', nombreVendedor:'Rosa'}  ,
-    { id: 2, valor: '300000', idProducto:'2', cantidad:'3', precioUnitario:'100000', fecha:'yy/yy/yyyy', idCliente:'234', nombreCliente:'Marco', nombreVendedor:'Rosa'} ,
-    { id: 3, valor: '300000', idProducto:'3', cantidad:'3', precioUnitario:'100000', fecha:'yy/yy/yyyy', idCliente:'234', nombreCliente:'Marco', nombreVendedor:'Rosa'}  ,
-    { id: 4, valor: '300000', idProducto:'4', cantidad:'3', precioUnitario:'100000', fecha:'yy/yy/yyyy', idCliente:'234', nombreCliente:'Marco', nombreVendedor:'Rosa'}  ,
-  ];
+  { id: 1, valor: '300000', idProducto: '1', cantidad: '3', precioUnitario: '100000', fecha: '2021-10-07', idCliente: '234', nombreCliente: 'Marco', nombreVendedor: 'Rosa' },
+  { id: 2, valor: '300000', idProducto: '2', cantidad: '3', precioUnitario: '100000', fecha: '2021-10-07', idCliente: '234', nombreCliente: 'Marco', nombreVendedor: 'Rosa' },
+  { id: 3, valor: '300000', idProducto: '3', cantidad: '3', precioUnitario: '100000', fecha: '2021-10-07', idCliente: '234', nombreCliente: 'Marco', nombreVendedor: 'Rosa' },
+  { id: 4, valor: '300000', idProducto: '4', cantidad: '3', precioUnitario: '100000', fecha: '2021-10-07', idCliente: '234', nombreCliente: 'Marco', nombreVendedor: 'Rosa' },
+];
 
 class Ventas extends React.Component {
-
-    /*const [ventas, setVentas] = useState(datosVenta);
-
-  //
-    const eliminarVenta = (id) => {
-    setVentas(ventas.filter((venta) => venta.id !== id));
-  };*/
 
   state = {
     data: datosVenta,
@@ -27,7 +21,7 @@ class Ventas extends React.Component {
       fecha: "",
       idCliente: "",
       nombreCliente: "",
-      nombreVendedor:"",
+      nombreVendedor: "",
     },
     modalInsertar: false,
     modalEditar: false,
@@ -62,7 +56,7 @@ class Ventas extends React.Component {
   };
 
   cerrarModalEditar = () => {
-    this.setState({modalEditar: false,});
+    this.setState({ modalEditar: false, });
   };
 
   insertar = () => {
@@ -70,7 +64,7 @@ class Ventas extends React.Component {
     valorNuevo.id = this.state.data.length + 1;
     var arreglo = this.state.data;
     arreglo.push(valorNuevo);
-    this.setState({modalInsertar: false, data: arreglo});
+    this.setState({ modalInsertar: false, data: arreglo });
   };
 
   editar = (dato) => {
@@ -116,19 +110,15 @@ class Ventas extends React.Component {
   render() {
     return (
       <>
-        <br/><br/>
-        <h2 className="titulo">REGISTRO DE VENTAS</h2>
-        <br/>
+        <br />
+        <h2 className="titulo">GESTION DE VENTAS</h2>
+        <br />
         <Container>
-          <Button color="success" onClick={() => this.mostrarModalInsertar()}>Agregar venta</Button>
-          <br/>
-          <div className="buscar centrar">
-            <input placeholder="Buscar..." type="text"/>
-            <i class="fas fa-search iconoBusqueda"></i>
-          </div>
+          <Button color="success" onClick={() => this.mostrarModalInsertar()}>Nueva Venta</Button>
+          <br /><br />
           <Table>
             <thead>
-                <tr>
+              <tr>
                 <th>ID venta</th>
                 <th>Valor</th>
                 <th>ID producto</th>
@@ -139,28 +129,26 @@ class Ventas extends React.Component {
                 <th>Nombre cliente</th>
                 <th>Nombre vendedor</th>
                 <th>Editar/Eliminar</th>
-                </tr>
+              </tr>
             </thead>
             <tbody>
               {this.state.data.map((venta) => (
                 <tr key={venta.id}>
-                <td>{venta.id}</td>
-                <td>{venta.valor}</td>
-                <td>{venta.idProducto}</td>
-                <td>{venta.cantidad}</td>
-                <td>{venta.precioUnitario}</td>
-                <td>{venta.fecha}</td>
-                <td>{venta.idCliente}</td>
-                <td>{venta.nombreCliente}</td>
-                <td>{venta.nombreVendedor}</td>
-              <td className="accion">
-                <button type="button" className="btn btn-secondary botonTabla"
-                          onClick={() => this.mostrarModalEditar(venta)}><i class="far fa-edit iconoEditar "></i></button>
-                
-                <button type="button" className="btn btn-danger" 
-                          onClick={() => this.eliminar(venta)}><i class="fas fa-trash-alt iconoEditar "></i></button>
-              </td>
-            </tr>
+                  <td>{venta.id}</td>
+                  <td>{venta.valor}</td>
+                  <td>{venta.idProducto}</td>
+                  <td>{venta.cantidad}</td>
+                  <td>{venta.precioUnitario}</td>
+                  <td>{venta.fecha}</td>
+                  <td>{venta.idCliente}</td>
+                  <td>{venta.nombreCliente}</td>
+                  <td>{venta.nombreVendedor}</td>
+                  <td>
+                    <Button color="primary" onClick={() => this.mostrarModalEditar(venta)}>Editar</Button>
+                    {"  "}
+                    <Button color="danger" onClick={() => this.eliminar(venta)}>Eliminar</Button>
+                  </td>
+                </tr>
               ))}
             </tbody>
           </Table>
@@ -168,12 +156,12 @@ class Ventas extends React.Component {
 
         <Modal isOpen={this.state.modalInsertar}>
           <ModalHeader>
-            <div><h3>Agregar venta</h3></div>
+            <div><h3>Nueva Venta</h3></div>
           </ModalHeader>
 
           <ModalBody>
             <FormGroup>
-              <label>ID:</label>
+              <label>Id:</label>
               <input className="form-control" readOnly type="text" value={this.state.data.length + 1} />
             </FormGroup>
 
@@ -183,7 +171,7 @@ class Ventas extends React.Component {
             </FormGroup>
 
             <FormGroup>
-              <label>ID producto:</label>
+              <label>Id Producto:</label>
               <input className="form-control" name="idProducto" type="text" onChange={this.handleChange} />
             </FormGroup>
 
@@ -203,7 +191,7 @@ class Ventas extends React.Component {
             </FormGroup>
 
             <FormGroup>
-              <label>ID cliente:</label>
+              <label>Id Cliente:</label>
               <input className="form-control" name="idCliente" type='text' onChange={this.handleChange} />
             </FormGroup>
 
@@ -227,13 +215,13 @@ class Ventas extends React.Component {
 
         <Modal isOpen={this.state.modalEditar}>
           <ModalHeader>
-            <div><h3>Editar registro de venta</h3></div>
+            <div><h3>Editar Venta</h3></div>
           </ModalHeader>
 
           <ModalBody>
             <FormGroup>
               <label>ID:</label>
-              <input className="form-control" name="id" readOnly type="text" value={this.state.form.id} />
+              <input className="form-control" readOnly type="text" value={this.state.form.id} />
             </FormGroup>
 
             <FormGroup>
@@ -253,7 +241,7 @@ class Ventas extends React.Component {
 
             <FormGroup>
               <label>Precio unitario:</label>
-              <input className="form-control" name="precioUnitario" type='number' onChange={this.handleChange} value={this.state.form.precioUnitario}/>
+              <input className="form-control" name="precioUnitario" type='number' onChange={this.handleChange} value={this.state.form.precioUnitario} />
             </FormGroup>
 
             <FormGroup>
@@ -278,7 +266,7 @@ class Ventas extends React.Component {
           </ModalBody>
 
           <ModalFooter>
-            <Button color="primary" onClick={() => this.editar(this.state.form)}>Aceptar</Button>
+            <Button color="primary" onClick={() => this.editar(this.state.form)}>Editar</Button>
             <Button color="danger" onClick={() => this.cerrarModalEditar()}>Cancelar</Button>
           </ModalFooter>
         </Modal>

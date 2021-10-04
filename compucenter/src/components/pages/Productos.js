@@ -113,7 +113,8 @@ class Productos extends React.Component {
     return (
       <>
         <br />
-
+        <h2 className="titulo">GESTION DE PRODUCTOS</h2>
+        <br />
         <Container>
           <Button color="success" onClick={() => this.mostrarModalInsertar()}>Nuevo Producto</Button>
           <br /><br />

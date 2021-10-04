@@ -106,7 +106,8 @@ class Usuarios extends React.Component {
     return (
       <>
         <br />
-
+        <h2>GESTION DE USUARIOS</h2>
+        <br />
         <Container>
           <Button color="success" onClick={() => this.mostrarModalInsertar()}>Nuevo Usuario</Button>
           <br /><br />

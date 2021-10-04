@@ -1,7 +1,7 @@
 import React from 'react';
 //import logo from './logo.svg';
 import './Productos.css';
-import { Table, Button, Container, Modal, ModalBody, ModalHeader, FormGroup, ModalFooter } from 'reactstrap';
+import { Table, Button, Container, Modal, ModalBody, ModalHeader, FormGroup, ModalFooter, Collapse } from 'reactstrap';
 
 const data = [
   { id: 1, nombre: "Portatil", descripcion: "Este es un portatil", cantidad: 5, estado: "ACTIVO", categoria: "Portatiles" },
@@ -118,9 +118,9 @@ class Productos extends React.Component {
         <Container>
           <Button color="success" onClick={() => this.mostrarModalInsertar()}>Nuevo Producto</Button>
           <br /><br />
-          <Table>
+          <Table style={{border: 1 + 'px solid black'}}>
             <thead>
-              <tr>
+              <tr className="Cabecera">
                 <th>Id</th>
                 <th>Nombre</th>
                 <th>Descripcion</th>
@@ -132,7 +132,7 @@ class Productos extends React.Component {
             </thead>
             <tbody>
               {this.state.data.map((elemento) => (
-                <tr>
+                <tr key={elemento.id} className="Datos">
                   <td>{elemento.id}</td>
                   <td>{elemento.nombre}</td>
                   <td>{elemento.descripcion}</td>

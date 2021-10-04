@@ -111,9 +111,9 @@ class Usuarios extends React.Component {
         <Container>
           <Button color="success" onClick={() => this.mostrarModalInsertar()}>Nuevo Usuario</Button>
           <br /><br />
-          <Table>
+          <Table style={{border: 1 + 'px solid black'}}>
             <thead>
-              <tr>
+              <tr className="Cabecera">
                 <th>ID</th>
                 <th>Usuario</th>
                 <th>Rol</th>
@@ -124,7 +124,7 @@ class Usuarios extends React.Component {
 
             <tbody>
               {this.state.data.map((dato) => (
-                <tr key={dato.id}>
+                <tr key={dato.id} className="Datos">
                   <td>{dato.id}</td>
                   <td>{dato.usuario}</td>
                   <td>{dato.rol}</td>

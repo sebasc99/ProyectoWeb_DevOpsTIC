@@ -1,3 +1,11 @@
 .Ventas {
     text-align: center;
   }
+
+  .Cabecera {
+    background-color: #3DA2D8;
+  }
+  
+  .Datos {
+    background-color: whitesmoke;
+  }

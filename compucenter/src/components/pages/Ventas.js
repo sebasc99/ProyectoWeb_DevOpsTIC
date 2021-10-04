@@ -116,9 +116,9 @@ class Ventas extends React.Component {
         <Container>
           <Button color="success" onClick={() => this.mostrarModalInsertar()}>Nueva Venta</Button>
           <br /><br />
-          <Table>
+          <Table style={{border: 1 + 'px solid black'}}>
             <thead>
-              <tr>
+              <tr className="Cabecera">
                 <th>ID venta</th>
                 <th>Valor</th>
                 <th>ID producto</th>
@@ -133,7 +133,7 @@ class Ventas extends React.Component {
             </thead>
             <tbody>
               {this.state.data.map((venta) => (
-                <tr key={venta.id}>
+                <tr key={venta.id} className="Datos">
                   <td>{venta.id}</td>
                   <td>{venta.valor}</td>
                   <td>{venta.idProducto}</td>

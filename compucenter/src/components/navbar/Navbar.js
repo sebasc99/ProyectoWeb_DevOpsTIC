@@ -18,6 +18,9 @@ const Navbar = () => {
                             <li className="nav-item">
                                 <Link className="nav-link" to="/ventas">Ventas</Link>
                             </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/usuarios">Usuarios</Link>
+                            </li>
                         </ul>
                         <ul className="navbar-nav justify-content-end">
                             <li className="nav-item">

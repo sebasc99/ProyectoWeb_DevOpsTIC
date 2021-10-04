@@ -108,6 +108,14 @@ class Usuarios extends React.Component {
         <br />
         <h2>GESTION DE USUARIOS</h2>
         <br />
+        
+        <div className="barraBusqueda">
+          <input type="text" placeholder="Buscar" className="textField" name="busqueda" />
+          <button type="button" className="btnBuscar">Buscar</button>
+        </div>
+
+        <br />
+
         <Container>
           <Button color="success" onClick={() => this.mostrarModalInsertar()}>Nuevo Usuario</Button>
           <br /><br />

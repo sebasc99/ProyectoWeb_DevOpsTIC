@@ -113,6 +113,14 @@ class Ventas extends React.Component {
         <br />
         <h2 className="titulo">GESTION DE VENTAS</h2>
         <br />
+        
+        <div className="barraBusqueda">
+          <input type="text" placeholder="Buscar" className="textField" name="busqueda" />
+          <button type="button" className="btnBuscar">Buscar</button>
+        </div>
+
+        <br />
+
         <Container>
           <Button color="success" onClick={() => this.mostrarModalInsertar()}>Nueva Venta</Button>
           <br /><br />

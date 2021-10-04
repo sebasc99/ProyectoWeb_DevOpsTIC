@@ -106,7 +106,7 @@ class Usuarios extends React.Component {
     return (
       <>
         <br />
-        
+
         <Container>
           <Button color="success" onClick={() => this.mostrarModalInsertar()}>Nuevo Usuario</Button>
           <br /><br />
@@ -278,7 +278,7 @@ class Usuarios extends React.Component {
               Cancelar
             </Button>
           </ModalFooter>
-        </Modal>        
+        </Modal>
       </>
     );
   }

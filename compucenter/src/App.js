@@ -9,11 +9,11 @@ function App() {
   return (
     <div className="App">
       <Router>
-          <Navbar />
-          <Switch>
-            <Route path="/productos" exact component={Productos} />
-          </Switch>
-        </Router>
+        <Navbar />
+        <Switch>
+          <Route path="/productos" exact component={Productos} />
+        </Switch>
+      </Router>
     </div>
   );
 }

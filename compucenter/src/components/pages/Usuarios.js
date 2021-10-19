@@ -1,49 +1,74 @@
-import React from "react";
-//import logo from "./logo.svg"; 
+import React from 'react';
 import "./Usuarios.css";
-import {
-  Table,
-  Button,
-  Container,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  FormGroup,
-  ModalFooter,
-} from "reactstrap";
+import { Table, Button, Container, Modal, ModalBody, ModalHeader, FormGroup, ModalFooter } from 'reactstrap';
+import axios from 'axios';
 
-const data = [
-  { id: 1, usuario: "Monica Alvarez", rol: "Administrador", estado: "Inactivo" },
-  { id: 2, usuario: "Andres", rol: "Vendedor", estado: "Inactivo" },
-  { id: 3, usuario: "Sebastian Cardenas", rol: "Vendedor", estado: "Inactivo" },
-  { id: 4, usuario: "Luis Gomez", rol: "Vendedor", estado: "Inactivo" },
-  { id: 5, usuario: "Sebastian Cataño", rol: "Vendedor", estado: "Inactivo" },
-  { id: 6, usuario: "Sebastian Leal", rol: "Vendedor", estado: "Inactivo" },
-];
+const url = 'http://localhost:3001/api/usuario';
 
 class Usuarios extends React.Component {
+
   state = {
-    data: data,
-    modalActualizar: false,
-    modalInsertar: false,
-    form: {
+    usuarios: [],
+    data: {
+      _id: "",
       id: "",
       usuario: "",
       rol: "",
       estado: "",
     },
+    modalInsertar: false,
+    modalEditar: false,
   };
 
-  mostrarModalActualizar = (dato) => {
-    this.setState({
-      form: dato,
-      modalActualizar: true,
+  peticionGet = () => {
+    axios.get(url).then(response => {
+      //console.log(response.data.ventas);
+      //this.setState(response.data)
+      const usuarios = response.data.usuarios;
+      this.setState({ usuarios });
+    }).catch(error => {
+      //console.log(error.message);
+    })
+  }
+
+  componentDidMount() {
+    this.peticionGet();
+  }
+
+  peticionPost = async () => {
+    await axios.post(url, this.state.data).then(response => {
+      this.mostrarModalInsertar();
+      this.peticionGet();
+    }).catch(error => {
+      //console.log(error.message);
     });
-  };
 
-  cerrarModalActualizar = () => {
-    this.setState({ modalActualizar: false });
-  };
+    this.setState({
+      modalInsertar: false,
+    });
+  }
+
+  peticionPut = () => {
+    axios.put(url + '/' + this.state.data._id, this.state.data).then(response => {
+      this.peticionGet();
+    });
+
+    this.setState({
+      modalEditar: false,
+    });
+  }
+
+  handleChange = async e => {
+    e.persist();
+    await this.setState({
+      data: {
+        ...this.state.data,
+        [e.target.name]: e.target.value
+      }
+    });
+    //console.log(this.state.data);
+  }
+
 
   mostrarModalInsertar = () => {
     this.setState({
@@ -52,7 +77,28 @@ class Usuarios extends React.Component {
   };
 
   cerrarModalInsertar = () => {
-    this.setState({ modalInsertar: false });
+    this.setState({
+      modalInsertar: false,
+    });
+  };
+
+  mostrarModalEditar = (registro) => {
+    this.setState({
+      data: registro,
+      modalEditar: true,
+    });
+  };
+
+  cerrarModalEditar = () => {
+    this.setState({ modalEditar: false, });
+  };
+
+  insertar = () => {
+    var valorNuevo = { ...this.state.data };
+    valorNuevo.id = this.state.data.length + 1;
+    var arreglo = this.state.data;
+    arreglo.push(valorNuevo);
+    this.setState({ modalInsertar: false, data: arreglo });
   };
 
   editar = (dato) => {
@@ -66,49 +112,18 @@ class Usuarios extends React.Component {
       }
       contador++;
     });
-    this.setState({ data: arreglo, modalActualizar: false });
-  };
-
-  eliminar = (dato) => {
-    var opcion = window.confirm("Está Seguro que deseas eliminar el usuario " + dato.id + "?");
-    if (opcion == true) {
-      var contador = 0;
-      var arreglo = this.state.data;
-      arreglo.map((registro) => {
-        if (dato.id == registro.id) {
-          arreglo.splice(contador, 1);
-        }
-        contador++;
-      });
-      this.setState({ data: arreglo, modalActualizar: false });
-    }
-  };
-
-  insertar = () => {
-    var valorNuevo = { ...this.state.form };
-    valorNuevo.id = this.state.data.length + 1;
-    var lista = this.state.data;
-    lista.push(valorNuevo);
-    this.setState({ modalInsertar: false, data: lista });
-  }
-
-  handleChange = (e) => {
     this.setState({
-      form: {
-        ...this.state.form,
-        [e.target.name]: e.target.value,
-      },
+      data: arreglo,
+      modalEditar: false,
     });
   };
 
   render() {
-
     return (
       <>
         <br />
-        <h2>GESTION DE USUARIOS</h2>
+        <h2 className="titulo">GESTIÓN DE USUARIOS</h2>
         <br />
-        
         <div className="barraBusqueda">
           <input type="text" placeholder="Buscar" className="textField" name="busqueda" />
           <button type="button" className="btnBuscar">Buscar</button>
@@ -119,7 +134,7 @@ class Usuarios extends React.Component {
         <Container>
           <Button color="success" onClick={() => this.mostrarModalInsertar()}>Nuevo Usuario</Button>
           <br /><br />
-          <Table style={{border: 1 + 'px solid black'}}>
+          <Table style={{ border: 1 + 'px solid black' }}>
             <thead>
               <tr className="Cabecera">
                 <th>ID</th>
@@ -129,98 +144,23 @@ class Usuarios extends React.Component {
                 <th>Acción</th>
               </tr>
             </thead>
-
             <tbody>
-              {this.state.data.map((dato) => (
-                <tr key={dato.id} className="Datos">
-                  <td>{dato.id}</td>
-                  <td>{dato.usuario}</td>
-                  <td>{dato.rol}</td>
-                  <td>{dato.estado}</td>
-                  <td>
-                    <Button
-                      color="primary"
-                      onClick={() => this.mostrarModalActualizar(dato)}
-                    >
-                      Editar
-                    </Button>{" "}
-                    <Button color="danger" onClick={() => this.eliminar(dato)}>Eliminar</Button>
-                  </td>
-                </tr>
-              ))}
+              {this.state.usuarios.map(usuario => {
+                return (
+                  <tr key={usuario.id} className="Datos">
+                    <td>{usuario.id}</td>
+                    <td>{usuario.usuario}</td>
+                    <td>{usuario.rol}</td>
+                    <td>{usuario.estado}</td>
+                    <td>
+                      <Button color="primary" onClick={() => this.mostrarModalEditar(usuario)}>Editar</Button>
+                    </td>
+                  </tr>
+                )
+              })}
             </tbody>
           </Table>
         </Container>
-
-        <Modal isOpen={this.state.modalActualizar}>
-          <ModalHeader>
-            <div><h3>Editar Usuario</h3></div>
-          </ModalHeader>
-
-          <ModalBody>
-            <FormGroup>
-              <label>
-                Id:
-              </label>
-
-              <input
-                className="form-control"
-                readOnly
-                type="text"
-                value={this.state.form.id}
-              />
-            </FormGroup>
-
-            <FormGroup>
-              <label>
-                Usuario:
-              </label>
-              <input
-                className="form-control"
-                name="usuario"
-                type="text"
-                onChange={this.handleChange}
-                value={this.state.form.usuario}
-              />
-            </FormGroup>
-
-            <FormGroup>
-              <label>Rol:</label>
-              <select className="form-control" name="rol" onChange={this.handleChange} value={this.state.form.rol}>
-                <option value="">Seleccione</option>
-                <option value="ADMINISTRADOR">Administrador</option>
-                <option value="VENDEDOR">Vendedor</option>
-              </select>
-            </FormGroup>
-
-            <FormGroup>
-              <label>Estado:</label>
-              <select className="form-control" name="estado" onChange={this.handleChange} value={this.state.form.estado}>
-                <option value="">Seleccione</option>
-                <option value="ACTIVO">Activo</option>
-                <option value="PENDIENTE">Pendiente</option>
-                <option value="INACTIVO">Inactivo</option>
-              </select>
-            </FormGroup>
-          </ModalBody>
-
-          <ModalFooter>
-            <Button
-              color="primary"
-              onClick={() => this.editar(this.state.form)}
-            >
-              Editar
-            </Button>
-            <Button
-              color="danger"
-              onClick={() => this.cerrarModalActualizar()}
-            >
-              Cancelar
-            </Button>
-          </ModalFooter>
-        </Modal>
-
-
 
         <Modal isOpen={this.state.modalInsertar}>
           <ModalHeader>
@@ -229,28 +169,13 @@ class Usuarios extends React.Component {
 
           <ModalBody>
             <FormGroup>
-              <label>
-                Id:
-              </label>
-
-              <input
-                className="form-control"
-                readOnly
-                type="text"
-                value={this.state.data.length + 1}
-              />
+              <label>Id:</label>
+              <input className="form-control" name="id" type="text" onChange={this.handleChange} />
             </FormGroup>
 
             <FormGroup>
-              <label>
-                Usuario:
-              </label>
-              <input
-                className="form-control"
-                name="usuario"
-                type="text"
-                onChange={this.handleChange}
-              />
+              <label>Usuario:</label>
+              <input className="form-control" name="usuario" type="text" onChange={this.handleChange} />
             </FormGroup>
 
             <FormGroup>
@@ -274,22 +199,55 @@ class Usuarios extends React.Component {
           </ModalBody>
 
           <ModalFooter>
-            <Button
-              color="primary"
-              onClick={() => this.insertar()}
-            >
-              Insertar
-            </Button>
-            <Button
-              className="btn btn-danger"
-              onClick={() => this.cerrarModalInsertar()}
-            >
-              Cancelar
-            </Button>
+            <Button color="primary" onClick={() => this.peticionPost()}>Insertar</Button>
+            <Button color="danger" onClick={() => this.cerrarModalInsertar()}>Cancelar</Button>
+          </ModalFooter>
+        </Modal>
+
+
+        <Modal isOpen={this.state.modalEditar}>
+          <ModalHeader>
+            <div><h3>Editar Usuario</h3></div>
+          </ModalHeader>
+
+          <ModalBody>
+            <FormGroup>
+              <label>Id:</label>
+              <input className="form-control" readOnly name="id" type="text" value={this.state.data.id} />
+            </FormGroup>
+
+            <FormGroup>
+              <label>Usuario:</label>
+              <input className="form-control" name="usuario" type="text" onChange={this.handleChange} value={this.state.data.usuario} />
+            </FormGroup>
+
+            <FormGroup>
+              <label>Rol:</label>
+              <select className="form-control" name="rol" onChange={this.handleChange} value={this.state.data.rol}>
+                <option value="">Seleccione</option>
+                <option value="ADMINISTRADOR">Administrador</option>
+                <option value="VENDEDOR">Vendedor</option>
+              </select>
+            </FormGroup>
+
+            <FormGroup>
+              <label>Estado:</label>
+              <select className="form-control" name="estado" onChange={this.handleChange} value={this.state.data.estado}>
+                <option value="">Seleccione</option>
+                <option value="ACTIVO">Activo</option>
+                <option value="PENDIENTE">Pendiente</option>
+                <option value="INACTIVO">Inactivo</option>
+              </select>
+            </FormGroup>
+          </ModalBody>
+
+          <ModalFooter>
+            <Button color="primary" onClick={() => this.peticionPut()}>Editar</Button>
+            <Button color="danger" onClick={() => this.cerrarModalEditar()}>Cancelar</Button>
           </ModalFooter>
         </Modal>
       </>
-    );
+    )
   }
 }
 export default Usuarios;
